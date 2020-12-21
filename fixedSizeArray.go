@@ -139,7 +139,7 @@ func initialize(m *fixedSizeSlice){
 
 func removeLastLimitForever(m *fixedSizeSlice){
     lastRun := now()
-    sleeptime := time.Second
+    sleeptime := m.period/2
     for{
         time.Sleep(sleeptime)
         if now().Before(lastRun.Add(m.period)) {
