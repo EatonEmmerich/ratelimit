@@ -24,7 +24,7 @@ func TestNaiveWindow(t *testing.T) {
 }
 
 func BenchmarkNaiveWindow(b *testing.B) {
-	ratelimit.Benchmark(b, func() ratelimit.RateLimiter {
+	ratelimit.Benchmark(b, func(m int) ratelimit.RateLimiter {
 		return ratelimit.NewNaiveWindow(time.Millisecond, 10)
 	})
 }

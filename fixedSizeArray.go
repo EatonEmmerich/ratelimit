@@ -171,7 +171,7 @@ func credit(m *fixedSizeSlice) {
     }
 }
 
-func CreditForTesting(t *testing.T, l *fixedSizeSlice){
+func CreditForTesting(t testing.TB, l *fixedSizeSlice){
     credit(l)
 }
 

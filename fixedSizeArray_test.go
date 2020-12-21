@@ -65,16 +65,20 @@ func TestGoroutineCredits(t *testing.T){
     })
 }
 
-func BenchmarkFixedSizeArray_NeverLimit(b *testing.B) {
-    ratelimit.Benchmark(b, func() ratelimit.RateLimiter {
-        pl := ratelimit.NewFixedSizeSlice(time.Millisecond, 16384)
+func BenchmarkFixedSizeArray(b *testing.B) {
+    ratelimit.Benchmark(b, func(m int) ratelimit.RateLimiter {
+        pl := ratelimit.NewFixedSizeSlice(time.Millisecond, 10)
         return pl
     })
 }
 
-func BenchmarkFixedSizeArray_MostlyLimit(b *testing.B) {
-    ratelimit.Benchmark(b, func() ratelimit.RateLimiter {
-        pl := ratelimit.NewFixedSizeSlice(time.Millisecond, 2)
+func BenchmarkFixedSizeArray_Primed(b *testing.B) {
+    ratelimit.Benchmark(b, func(m int) ratelimit.RateLimiter {
+        pl := ratelimit.NewFixedSizeSlice(time.Millisecond, 10)
+        for i := 0 ; i < m; i ++{
+            pl.Request(fmt.Sprint(i))
+            ratelimit.CreditForTesting(b, pl)
+        }
         return pl
     })
 }

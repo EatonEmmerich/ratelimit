@@ -24,7 +24,7 @@ func TestSyncMapWindow(t *testing.T) {
 }
 
 func BenchmarkSyncMapWindow(b *testing.B) {
-	ratelimit.Benchmark(b, func() ratelimit.RateLimiter {
+	ratelimit.Benchmark(b, func(m int) ratelimit.RateLimiter {
 		return ratelimit.NewSyncMapWindow(time.Millisecond, 10)
 	})
 }
