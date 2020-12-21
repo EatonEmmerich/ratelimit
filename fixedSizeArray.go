@@ -72,7 +72,7 @@ func initialize(period time.Duration) *limitStruct{
 
 func removeLastLimitForever(ls *limitStruct, period time.Duration){
     lastRun := now()
-    sleeptime := period/2
+    sleeptime := time.Second
     for{
         time.Sleep(sleeptime)
         if now().Before(lastRun.Add(period)) {
